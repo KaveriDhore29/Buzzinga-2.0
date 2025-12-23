@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AskRoomComponent } from './pages/ask-room/ask-room.component';
 import { RoomSetupComponent } from './pages/room-setup/room-setup.component';
+import { MainRoomComponent } from './pages/main-room/main-room.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AskRoomComponent,
-    RoomSetupComponent
+    RoomSetupComponent,
+    MainRoomComponent
   ],
   imports: [
     BrowserModule,

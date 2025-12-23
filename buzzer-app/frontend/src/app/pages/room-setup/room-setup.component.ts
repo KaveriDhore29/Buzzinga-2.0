@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-setup',
@@ -10,7 +10,7 @@ export class RoomSetupComponent implements OnInit {
 
    isOwner: boolean = false;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,private router: Router) {}
 
   ngOnInit(): void {
     const role = this.route.snapshot.queryParamMap.get('role');
@@ -24,5 +24,11 @@ export class RoomSetupComponent implements OnInit {
 
   switchToUser() {
     this.isOwner = false;
+  }
+
+  startGame(){
+       const dummyRoomId = 'ABCD1234'; // static for now
+    this.router.navigate(['/main-room', dummyRoomId]);
+
   }
 }
