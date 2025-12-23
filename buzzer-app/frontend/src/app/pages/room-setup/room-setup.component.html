@@ -1,0 +1,65 @@
+<div class="room-container">
+
+  <!-- OWNER VIEW -->
+  <div class="card" *ngIf="isOwner">
+    <h2 class="card-title">Create Room</h2>
+
+    <div class="form-group">
+      <label>Max Players</label>
+      <input type="number" placeholder="Enter number of players" />
+    </div>
+
+    <div class="form-group">
+      <label>Language</label>
+      <select>
+        <option>Select language</option>
+        <option>English</option>
+        <option>Hindi</option>
+        <option>Kannada</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Session Time</label>
+      <select>
+        <option>Select time</option>
+        <option>5 minutes</option>
+        <option>10 minutes</option>
+        <option>15 minutes</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Invite Link</label>
+      <div class="invite-box">
+        <input type="text" value="https://buzzinga.app/room/ABCD1234" readonly />
+        <button class="copy-btn">Copy</button>
+      </div>
+    </div>
+
+    <button class="primary-btn">Start Game</button>
+
+    <p class="switch-text">
+      Want to join instead?
+      <span class="link" (click)="switchToUser()">Join Room</span>
+    </p>
+  </div>
+
+  <!-- USER VIEW -->
+  <div class="card" *ngIf="!isOwner">
+    <h2 class="card-title">Join Room</h2>
+
+    <div class="form-group">
+      <label>Room ID</label>
+      <input type="text" placeholder="Enter Room ID" />
+    </div>
+
+    <button class="primary-btn">Join Room</button>
+
+    <p class="switch-text">
+      Wanna create room?
+      <span class="link" (click)="switchToOwner()">Create here</span>
+    </p>
+  </div>
+
+</div>
