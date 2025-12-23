@@ -11,6 +11,10 @@ const routes: Routes = [
     component:HomeComponent
   },
   {
+    path:'landing-page',
+    component:HomeComponent
+  },
+  {
     path:'ask-room',
     component:AskRoomComponent
   },

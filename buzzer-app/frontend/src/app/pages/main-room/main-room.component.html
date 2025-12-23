@@ -1,10 +1,23 @@
 <div class="container-fluid vh-100 bg-light">
+
+  <!-- HEADER -->
+  <div class="row align-items-center px-3 py-2 bg-white border-bottom">
+    <div class="col">
+      <strong>Room ID: ABCD1234</strong>
+    </div>
+    <div class="col text-end">
+      <button class="btn btn-outline-danger btn-sm" (click)="leaveRoom()">
+        Leave Room
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
   <div class="row h-100">
 
     <!-- LEFT: MEMBERS -->
     <div class="col-12 col-md-3 bg-white border-end p-3">
       <h5 class="text-center mb-3">Members</h5>
-
       <ul class="list-group">
         <li class="list-group-item">Kaveri</li>
         <li class="list-group-item">Amit</li>
@@ -18,17 +31,14 @@
       class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center text-white"
       style="background: linear-gradient(135deg, #667eea, #764ba2);"
     >
-      <h4 class="mb-4">Room ID: ABCD1234</h4>
-
       <button class="btn btn-light rounded-circle buzzer-btn">
         BUZZ!
       </button>
     </div>
 
-    <!-- RIGHT: BUZZED LIST -->
+    <!-- RIGHT: BUZZED -->
     <div class="col-12 col-md-3 bg-white border-start p-3">
       <h5 class="text-center mb-3">Buzzed</h5>
-
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between">
           Kaveri <span class="text-primary">00:01.23</span>
