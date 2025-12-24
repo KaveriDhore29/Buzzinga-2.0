@@ -18,12 +18,19 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-.card-title {
+.card-header {
+  position: relative;
+  padding: 20px;
+  border-bottom: none;
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
 }
 
+.card-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+}
 /* Form */
 .form-group {
   margin-bottom: 15px;
@@ -68,6 +75,25 @@ select:focus {
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #4f6ef7;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
 }
 
 /* Buttons */
