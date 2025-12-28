@@ -71,7 +71,7 @@ export class SocketService implements OnDestroy {
     });
   }
 
-  joinRoom(data: { roomId: string; name?: string; role?: string; maxPlayers?: number; sessionTime?: string }): void {
+  joinRoom(data: { roomId: string; name?: string; role?: string; maxPlayers?: number; sessionTime?: string; sessionName?: string }): void {
     if (!this.socket || !this.socket.connected) {
       console.warn('Socket not connected, waiting for connection...');
       this.socket?.once('connect', () => {

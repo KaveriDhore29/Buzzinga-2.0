@@ -22,7 +22,7 @@ io.on('connection', socket => {
   // console.log(socket);
   console.log('Client connected:', socket.id);
 
-  socket.on('join-room', ({ roomId, name, role, maxPlayers, sessionTime }) => {
+  socket.on('join-room', ({ roomId, name, role, maxPlayers, sessionTime, sessionName }) => {
     socket.join(roomId);
 
     if (!rooms[roomId]) {
@@ -36,7 +36,8 @@ io.on('connection', socket => {
         sessionTime: sessionTimeNum && !isNaN(sessionTimeNum) ? sessionTimeNum : null, // in minutes
         sessionStartTime: Date.now(),
         sessionEndTime: sessionTimeMs ? Date.now() + sessionTimeMs : null,
-        ownerSocketId: socket.id
+        ownerSocketId: socket.id,
+        sessionName: sessionName || null
       };
 
       // Start session timer if sessionTime is provided
@@ -85,7 +86,8 @@ io.on('connection', socket => {
       maxPlayers: rooms[roomId].maxPlayers,
       sessionTime: rooms[roomId].sessionTime,
       sessionEndTime: rooms[roomId].sessionEndTime,
-      currentMembers: rooms[roomId].members.length
+      currentMembers: rooms[roomId].members.length,
+      sessionName: rooms[roomId].sessionName
     });
 
     // Update members list for everyone
@@ -125,7 +127,8 @@ io.on('connection', socket => {
         maxPlayers: rooms[roomId].maxPlayers,
         sessionTime: rooms[roomId].sessionTime,
         sessionEndTime: rooms[roomId].sessionEndTime,
-        currentMembers: rooms[roomId].members.length
+        currentMembers: rooms[roomId].members.length,
+        sessionName: rooms[roomId].sessionName
       });
     }
   });

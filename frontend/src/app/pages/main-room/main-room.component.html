@@ -3,10 +3,15 @@
   <!-- HEADER -->
   <div class="row align-items-center px-3 py-2 bg-white border-bottom">
     <div class="col">
-      <strong>Room ID: {{roomId}}</strong>
-      <span *ngIf="maxPlayers" class="ms-3 text-muted">
-        Players: {{members.length}}/{{maxPlayers}}
-      </span>
+      <div>
+        <strong>Room ID: {{roomId}}</strong>
+        <span *ngIf="maxPlayers" class="ms-3 text-muted">
+          Players: {{members.length}}/{{maxPlayers}}
+        </span>
+      </div>
+      <div *ngIf="sessionName" class="mt-1">
+        <small class="text-primary fw-bold">{{sessionName}}</small>
+      </div>
     </div>
     <div class="col text-center">
       <span *ngIf="timeRemaining" class="badge bg-primary fs-6">

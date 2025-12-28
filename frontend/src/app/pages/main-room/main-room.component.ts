@@ -14,6 +14,7 @@ export class MainRoomComponent implements OnInit, OnDestroy {
   role = 'user';
   maxPlayers: number | null = null;
   sessionTime: string | null = null;
+  sessionName: string = '';
 
   members: any[] = [];
   buzzes: { name: string; time: string }[] = [];
@@ -42,11 +43,12 @@ export class MainRoomComponent implements OnInit, OnDestroy {
       return;
     }
     
-    // Get username, role, maxPlayers, and sessionTime from query params if available
+    // Get username, role, maxPlayers, sessionTime, and sessionName from query params if available
     const nameFromParams = this.route.snapshot.queryParamMap.get('name');
     const roleFromParams = this.route.snapshot.queryParamMap.get('role');
     const maxPlayersParam = this.route.snapshot.queryParamMap.get('maxPlayers');
     const sessionTimeParam = this.route.snapshot.queryParamMap.get('sessionTime');
+    const sessionNameParam = this.route.snapshot.queryParamMap.get('sessionName');
     
     if (nameFromParams) {
       this.username = nameFromParams;
@@ -63,14 +65,19 @@ export class MainRoomComponent implements OnInit, OnDestroy {
     if (sessionTimeParam) {
       this.sessionTime = sessionTimeParam;
     }
+
+    if (sessionNameParam) {
+      this.sessionName = sessionNameParam;
+    }
   
-    // Join room with maxPlayers and sessionTime (only owner sets these initially)
+    // Join room with maxPlayers, sessionTime, and sessionName (only owner sets these initially)
     this.socketService.joinRoom({
       roomId: this.roomId,
       name: this.username,
       role: this.role,
       maxPlayers: this.maxPlayers || undefined,
-      sessionTime: this.sessionTime || undefined
+      sessionTime: this.sessionTime || undefined,
+      sessionName: this.sessionName || undefined
     });
 
     // Subscribe to room info updates
@@ -79,6 +86,9 @@ export class MainRoomComponent implements OnInit, OnDestroy {
         this.maxPlayers = info.maxPlayers;
         this.sessionTime = info.sessionTime ? info.sessionTime.toString() : null;
         this.sessionEndTime = info.sessionEndTime;
+        if (info.sessionName) {
+          this.sessionName = info.sessionName;
+        }
         if (info.sessionEndTime) {
           this.startTimer();
         }
