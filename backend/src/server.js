@@ -22,14 +22,48 @@ io.on('connection', socket => {
   // console.log(socket);
   console.log('Client connected:', socket.id);
 
-  socket.on('join-room', ({ roomId, name, role }) => {
+  socket.on('join-room', ({ roomId, name, role, maxPlayers, sessionTime }) => {
     socket.join(roomId);
 
     if (!rooms[roomId]) {
+      // Room doesn't exist, create it (owner creating room)
+      const sessionTimeNum = sessionTime ? parseInt(sessionTime) : null;
+      const sessionTimeMs = sessionTimeNum && !isNaN(sessionTimeNum) ? sessionTimeNum * 60 * 1000 : null; // Convert minutes to milliseconds
       rooms[roomId] = {
         members: [],
-        buzzes: []
+        buzzes: [],
+        maxPlayers: maxPlayers ? parseInt(maxPlayers) : null,
+        sessionTime: sessionTimeNum && !isNaN(sessionTimeNum) ? sessionTimeNum : null, // in minutes
+        sessionStartTime: Date.now(),
+        sessionEndTime: sessionTimeMs ? Date.now() + sessionTimeMs : null,
+        ownerSocketId: socket.id
       };
+
+      // Start session timer if sessionTime is provided
+      if (sessionTimeMs) {
+        setTimeout(() => {
+          if (rooms[roomId]) {
+            io.to(roomId).emit('session-ended');
+            console.log(`Session ended for room ${roomId}`);
+          }
+        }, sessionTimeMs);
+      }
+    } else {
+      // Room exists, check if it's full
+      const currentMemberCount = rooms[roomId].members.length;
+      const maxPlayersLimit = rooms[roomId].maxPlayers;
+      
+      // Check if user is already a member (rejoining)
+      const existingMemberIndex = rooms[roomId].members.findIndex(m => m.id === socket.id);
+      const isRejoining = existingMemberIndex !== -1;
+
+      // If room is full and user is not rejoining, reject
+      if (maxPlayersLimit && currentMemberCount >= maxPlayersLimit && !isRejoining) {
+        socket.emit('room-full', { message: 'Room is full. Maximum players reached.' });
+        socket.leave(roomId);
+        console.log(`Join rejected: Room ${roomId} is full (${currentMemberCount}/${maxPlayersLimit})`);
+        return;
+      }
     }
 
     // Check if member already exists (prevent duplicate entries on rejoin)
@@ -45,8 +79,14 @@ io.on('connection', socket => {
       rooms[roomId].members[existingMemberIndex] = { id: socket.id, name, role };
     }
 
-    // Send existing buzzes to the newly joined user
+    // Send room info to the newly joined user
     socket.emit('buzz-history', rooms[roomId].buzzes);
+    socket.emit('room-info', {
+      maxPlayers: rooms[roomId].maxPlayers,
+      sessionTime: rooms[roomId].sessionTime,
+      sessionEndTime: rooms[roomId].sessionEndTime,
+      currentMembers: rooms[roomId].members.length
+    });
 
     // Update members list for everyone
     io.to(roomId).emit('members-updated', rooms[roomId].members);
@@ -55,6 +95,14 @@ io.on('connection', socket => {
   socket.on('buzz', ({ roomId, name }) => {
     if (!rooms[roomId]) {
       console.log(`Buzz rejected: Room ${roomId} does not exist`);
+      socket.emit('error', { message: 'Room does not exist' });
+      return;
+    }
+
+    // Check if session has ended
+    if (rooms[roomId].sessionEndTime && Date.now() > rooms[roomId].sessionEndTime) {
+      socket.emit('error', { message: 'Session has ended' });
+      console.log(`Buzz rejected: Session ended for room ${roomId}`);
       return;
     }
 
@@ -68,6 +116,18 @@ io.on('connection', socket => {
     io.to(roomId).emit('buzz-update', buzzData);
     
     console.log(`Buzz from ${name} in room ${roomId} at ${time}`);
+  });
+
+  // Handle timer update requests
+  socket.on('get-room-info', ({ roomId }) => {
+    if (rooms[roomId]) {
+      socket.emit('room-info', {
+        maxPlayers: rooms[roomId].maxPlayers,
+        sessionTime: rooms[roomId].sessionTime,
+        sessionEndTime: rooms[roomId].sessionEndTime,
+        currentMembers: rooms[roomId].members.length
+      });
+    }
   });
 
   socket.on('disconnecting', () => {

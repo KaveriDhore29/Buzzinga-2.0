@@ -68,7 +68,12 @@ export class RoomSetupComponent implements OnInit {
       return;
     }
     this.router.navigate(['/main-room', this.roomId], {
-      queryParams: { name: this.username, role: this.isOwner ? 'owner' : 'user' }
+      queryParams: { 
+        name: this.username, 
+        role: this.isOwner ? 'owner' : 'user',
+        maxPlayers: this.maxPlayers,
+        sessionTime: this.sessionTime
+      }
     });
   }
 

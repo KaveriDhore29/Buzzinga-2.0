@@ -71,7 +71,7 @@ export class SocketService implements OnDestroy {
     });
   }
 
-  joinRoom(data: { roomId: string; name?: string; role?: string }): void {
+  joinRoom(data: { roomId: string; name?: string; role?: string; maxPlayers?: number; sessionTime?: string }): void {
     if (!this.socket || !this.socket.connected) {
       console.warn('Socket not connected, waiting for connection...');
       this.socket?.once('connect', () => {
@@ -80,6 +80,40 @@ export class SocketService implements OnDestroy {
       return;
     }
     this.socket.emit('join-room', data);
+  }
+
+  getRoomInfo(roomId: string): void {
+    if (this.socket && this.socket.connected) {
+      this.socket.emit('get-room-info', { roomId });
+    }
+  }
+
+  onRoomInfo(): Observable<any> {
+    if (!this.socket) {
+      this.initializeSocket();
+    }
+    return fromEvent(this.socket!, 'room-info');
+  }
+
+  onRoomFull(): Observable<any> {
+    if (!this.socket) {
+      this.initializeSocket();
+    }
+    return fromEvent(this.socket!, 'room-full');
+  }
+
+  onSessionEnded(): Observable<any> {
+    if (!this.socket) {
+      this.initializeSocket();
+    }
+    return fromEvent(this.socket!, 'session-ended');
+  }
+
+  onError(): Observable<any> {
+    if (!this.socket) {
+      this.initializeSocket();
+    }
+    return fromEvent(this.socket!, 'error');
   }
 
   buzz(data: { roomId: string; name?: string }): void {
