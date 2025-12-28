@@ -20,7 +20,7 @@ export class RoomSetupComponent implements OnInit {
   language: string = 'English';
   username: string = '';
   userRoomId: string = ''; // For user view room ID input
-   @ViewChild('validationModal') modalRef!: ElementRef;
+  @ViewChild('validationModal') modalRef!: ElementRef;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -62,17 +62,36 @@ export class RoomSetupComponent implements OnInit {
     document.body.classList.remove('modal-open');
   }
 
+  generateDefaultSessionName(): string {
+    const names = [
+      'Buzzinga Blitz',
+      'Quick Buzzer Challenge',
+      'Buzzinga Speed Round',
+      'Rapid Response Session',
+      'Buzzinga Lightning Round',
+      'Fast Fingers Challenge',
+      'Buzzinga Quick Fire',
+      'Speed Buzzer Battle'
+    ];
+    return names[Math.floor(Math.random() * names.length)];
+  }
+
   startGame() {
      if (!this.maxPlayers || !this.sessionTime) {
       this.showModal();
       return;
     }
+    
+    // Use provided session name or generate a default one
+    const sessionNameToUse = this.sessionName.trim() || this.generateDefaultSessionName();
+    
     this.router.navigate(['/main-room', this.roomId], {
       queryParams: { 
         name: this.username, 
         role: this.isOwner ? 'owner' : 'user',
         maxPlayers: this.maxPlayers,
-        sessionTime: this.sessionTime
+        sessionTime: this.sessionTime,
+        sessionName: sessionNameToUse
       }
     });
   }

@@ -61,12 +61,19 @@
 
   <!-- Save Session Toggle -->
   <div class="form-group toggle-group">
-    <label class="toggle-label">
+    <label class="toggle-label d-flex align-items-center gap-2">
       <input
         type="checkbox"
         [(ngModel)]="saveSession"
+        class="form-check-input"
+        style="cursor: pointer;"
       />
       <span>Save this session</span>
+      <i
+        class="bi bi-info-circle info-icon"
+        title="This requires login. After clicking, the session will be saved and you can review the buzzed list later."
+        style="cursor: help;"
+      ></i>
     </label>
   </div>
 
