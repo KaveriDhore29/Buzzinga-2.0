@@ -1,0 +1,65 @@
+<div class="container-fluid vh-100 bg-light">
+
+  <!-- HEADER -->
+  <div class="row align-items-center px-3 py-2 bg-white border-bottom">
+    <div class="col">
+      <strong>Room ID: {{roomId}}</strong>
+    </div>
+    <div class="col text-end">
+      <button class="btn btn-outline-danger btn-sm" (click)="leaveRoom()">
+        Leave Room
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="row h-100">
+
+    <!-- LEFT: MEMBERS -->
+    <div class="col-12 col-md-3 bg-white border-end p-3">
+      <h5 class="text-center mb-3">Members</h5>
+      <ul class="list-group">
+        <li *ngFor="let member of members" class="list-group-item">
+      {{ member.name }}
+      <span *ngIf="socketService.getSocketId() && member.id === socketService.getSocketId()" class="text-primary fw-bold">(you)</span>
+      <span *ngIf="member.role === 'owner'">(Owner)</span>
+    </li>
+      </ul>
+    </div>
+
+    <!-- CENTER: BUZZER -->
+    <div
+      class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center text-white"
+      style="background: linear-gradient(135deg, #667eea, #764ba2);"
+    >
+      <button class="btn btn-light rounded-circle buzzer-btn" (click)="buzz()">
+        BUZZ!
+      </button>
+    </div>
+
+    <!-- RIGHT: BUZZED -->
+<div class="col-12 col-md-3 bg-white border-start p-3">
+  <h5 class="text-center mb-3">Buzzed</h5>
+
+  <ul class="list-group">
+    <li
+      *ngFor="let buzz of buzzes"
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
+      <strong>{{ buzz.name }}</strong>
+      <span class="text-primary">{{ buzz.time }}</span>
+    </li>
+
+    <!-- Optional empty state -->
+    <li
+      *ngIf="buzzes.length === 0"
+      class="list-group-item text-center text-muted"
+    >
+      No buzz yet
+    </li>
+  </ul>
+</div>
+
+
+  </div>
+</div>
