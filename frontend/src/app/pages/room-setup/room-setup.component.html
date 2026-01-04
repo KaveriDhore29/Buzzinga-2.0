@@ -14,19 +14,10 @@
       type="number"
       placeholder="Enter number of players"
       [(ngModel)]="maxPlayers"
-      min="1"
+      min=2 max=10
       required
     />
-  </div>
-
-  <!-- Language -->
-  <div class="form-group">
-    <label>Language</label>
-    <select [(ngModel)]="language">
-      <option value="English">English</option>
-      <option value="Hindi">Hindi</option>
-      <option value="Kannada">Kannada</option>
-    </select>
+    <span class="input-focus-line"></span>
   </div>
 
   <!-- Session Time -->
@@ -57,24 +48,46 @@
       placeholder="e.g. Weekly Quiz – Team A"
       [(ngModel)]="sessionName"
     />
+    <span class="input-focus-line"></span>
   </div>
 
   <!-- Save Session Toggle -->
-  <div class="form-group toggle-group">
+  <div class="form-group toggle-group" *ngIf="isOwner">
     <label class="toggle-label d-flex align-items-center gap-2">
       <input
         type="checkbox"
         [(ngModel)]="saveSession"
+        (change)="onSaveSessionChange()"
+        [disabled]="!currentUser"
         class="form-check-input"
         style="cursor: pointer;"
       />
-      <span>Save this session</span>
+      <span [class.disabled-text]="!currentUser">Save this session</span>
       <i
         class="bi bi-info-circle info-icon"
         title="This requires login. After clicking, the session will be saved and you can review the buzzed list later."
         style="cursor: help;"
       ></i>
     </label>
+    <small *ngIf="!currentUser" class="login-required-text">Login required to save sessions</small>
+  </div>
+
+   <!-- User Login Status -->
+  <div class="form-group" *ngIf="isOwner">
+    <div class="login-status" *ngIf="currentUser; else notLoggedIn">
+      <div class="user-info">
+        <span class="user-name">Logged in as: <strong>{{ currentUser.name }}</strong></span>
+        <div class="user-actions">
+          <a (click)="this.router.navigate(['/my-sessions'])" class="my-sessions-link">My Sessions</a>
+          <button type="button" class="logout-btn" (click)="authService.logout(); currentUser = null">Logout</button>
+        </div>
+      </div>
+    </div>
+    <ng-template #notLoggedIn>
+      <div class="login-prompt">
+        <p class="login-text">Want to save sessions? <a (click)="goToLogin()" class="login-link">Login</a></p>
+      </div>
+    </ng-template>
   </div>
 
   <!-- Invite Link -->

@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+/* ======================================================
+   BUZZINGA 2.0 — WAR ROOM / DABAKE THEME
+   Minimal • Competitive • Professional
+====================================================== */
+:root {
+  /* Backgrounds & Surfaces */
+  --color-bg-deep: #1a0b2e;
+  --color-surface-purple: #321a50;
+  
+  /* Brand & Accents */
+  --color-primary-orchid: #8d5cf6;
+  --color-accent-orange: #ff6b35;
+  --color-glow-gold: #ffb142;
+
+  /* Gradients */
+  --grad-cinema: linear-gradient(135deg, #1a0b2e 0%, #4b2c7f 100%);
+  --grad-screen-glow: radial-gradient(circle, #ffb142 0%, #ff6b35 70%, transparent 100%);
+
+  scroll-snap-type: initial;
+  scroll-behavior: smooth;
+}
+
+
+/* ===============================
+   GLOBAL RESET
+================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+
+/* ===============================
+   CARDS / PANELS
+================================ */
+
+.glass-card:hover,
+.panel:hover,
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.8);
+}
+
+/* ===============================
+   TYPOGRAPHY
+================================ */
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+

@@ -1,84 +1,278 @@
-/* Full screen center layout */
+/* ===============================
+   GLOBAL RESET
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* ===============================
+   PAGE BACKGROUND
+================================ */
 .home-container {
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.6)
+    ), url('src/assets/ask-room.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Card */
+
+
+/* ===============================
+   CARD
+================================ */
 .card {
-  background-color: #ffffff;
-  width: 360px;
-  padding: 30px 25px;
-  border-radius: 12px;
+  background: transparent;
+  border-radius: 22px;
+  padding: 3.8rem 3rem;
+  width: min(520px, 92%);
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #0dcaf0;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(4px);
+  position: relative;
 }
 
-/* Heading */
+/* ===============================
+   HEADER
+================================ */
+header {
+  margin-bottom: 3rem;
+}
+
+/* ===============================
+   TITLE
+================================ */
 .title {
-  margin: 0;
-  font-size: 28px;
-  color: #333;
+  font-size: 3.4rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  margin-bottom: 1rem;
 }
 
+.letter {
+  display: inline-block;
+  color: #FFFFFF;
+  animation: letterGlow 3s infinite ease-in-out;
+}
+
+.l1 { animation-delay: 0s; }
+.l2 { animation-delay: 0.15s; }
+.l3 { animation-delay: 0.3s; }
+.l4 { animation-delay: 0.45s; }
+.l5 { animation-delay: 0.6s; }
+.l6 { animation-delay: 0.75s; }
+.l7 { animation-delay: 0.9s; }
+.l8 { animation-delay: 1.05s; }
+
+@keyframes letterGlow {
+  0%, 100% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow:
+      0 0 12px rgba(141, 92, 246, 0.85),
+      0 0 24px rgba(255, 107, 53, 0.55);
+  }
+}
+
+/* ===============================
+   SUBTITLE
+================================ */
 .subtitle {
-  margin: 8px 0 25px;
-  font-size: 14px;
-  color: #666;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFB142;
+  opacity: 0.9;
 }
 
-/* Input */
+/* ===============================
+   INPUT
+================================ */
 .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 3rem;
+}
+
+.input-wrapper {
+  position: relative;
 }
 
 .name-input {
   width: 100%;
-  padding: 12px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  outline: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  padding: 0.8rem 0;
+  font-size: 1rem;
+  color: #FFFFFF;
+  letter-spacing: 0.08em;
+}
+
+.name-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .name-input:focus {
-  border-color: #667eea;
+  outline: none;
 }
 
-/* Buttons */
+.input-focus-line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #8D5CF6,
+    #FF6B35,
+    #FFB142
+  );
+  transition: width 0.35s ease;
+}
+
+.name-input:focus + .input-focus-line {
+  width: 100%;
+}
+
+/* ===============================
+   BUTTON GROUP
+================================ */
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1.4rem;
 }
 
+/* ===============================
+   BUTTON BASE
+================================ */
 .btn {
-  padding: 12px;
-  font-size: 15px;
-  border-radius: 6px;
+  padding: 1.2rem;
+  border-radius: 14px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  transition: all 0.25s ease;
 }
 
+.btn-text {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #FFFFFF;
+  display: block;
+}
+
+.btn-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.4rem;
+}
+
+/* ===============================
+   PRIMARY BUTTON
+================================ */
 .primary-btn {
-  background-color: #667eea;
-  color: #ffffff;
+    display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 16px 36px;
+  border-radius: 999px; /* 🔑 pill shape */
+
+  border: 2px solid rgba(141, 92, 246, 0.9);
+  background: rgba(26, 11, 46, 0.65);
+
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 0 18px rgba(141, 92, 246, 0.55),
+    inset 0 0 12px rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
 }
 
 .primary-btn:hover {
-  background-color: #556cd6;
+   transform: translateY(-2px);
+  box-shadow:
+    0 0 26px rgba(141, 92, 246, 0.9),
+    0 0 48px rgba(255, 107, 53, 0.6);
 }
 
+/* ===============================
+   SECONDARY BUTTON
+================================ */
 .secondary-btn {
-  background-color: #f2f2f2;
-  color: #333;
+    display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 16px 36px;
+  border-radius: 999px; /* 🔑 pill shape */
+
+  border: 2px solid rgb(15, 181, 246);
+  background: rgb(17, 180, 255);
+
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 0 18px rgba(15, 181, 246, 0.55),
+    inset 0 0 12px rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
 }
 
 .secondary-btn:hover {
-  background-color: #e0e0e0;
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 60px rgba(15, 181, 246, 0.8);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .card {
+    padding: 3rem 2rem;
+  }
 }

@@ -2,9 +2,21 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const connectDB = require('./config/database');
+
+// Connect to MongoDB
+connectDB();
 
 const app = express();
+
+// Middleware
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/sessions', require('./routes/sessions'));
 
 const server = http.createServer(app);
 

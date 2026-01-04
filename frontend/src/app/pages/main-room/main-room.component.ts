@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-room',
-  templateUrl: './main-room.component.html'
+  templateUrl: './main-room.component.html',
+  styleUrls: ['./main-room.component.css']
 })
 export class MainRoomComponent implements OnInit, OnDestroy {
 
@@ -15,6 +16,7 @@ export class MainRoomComponent implements OnInit, OnDestroy {
   maxPlayers: number | null = null;
   sessionTime: string | null = null;
   sessionName: string = '';
+  buzzSound = new Audio('assets/chin_dabak_dam_dam.mp3');
 
   members: any[] = [];
   buzzes: { name: string; time: string }[] = [];
@@ -36,7 +38,7 @@ export class MainRoomComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.roomId = this.route.snapshot.paramMap.get('roomId') || '';
-    
+    window.scrollTo({ top: 0, behavior: 'auto' });
     if (!this.roomId) {
       console.error('Room ID not found in route parameters');
       this.router.navigate(['/landing-page']);
@@ -187,7 +189,8 @@ export class MainRoomComponent implements OnInit, OnDestroy {
       console.error('Cannot buzz: username is missing or empty');
       return;
     }
-
+this.buzzSound.currentTime = 0; // allow rapid clicks
+  this.buzzSound.play().catch(() => {});
     this.socketService.buzz({
       roomId: this.roomId,
       name: this.username

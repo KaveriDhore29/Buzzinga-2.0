@@ -1,24 +1,36 @@
 <div class="home-container">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
   <div class="card">
-    <h1 class="title">BUZZINGA 2.0</h1>
-    <p class="subtitle">Real-time Buzzer Application</p>
+    <header>
+      <h1 class="title">
+        <span class="letter l1">B</span><span class="letter l2">U</span><span class="letter l3">Z</span><span class="letter l4">Z</span><span class="letter l5">I</span><span class="letter l6">N</span><span class="letter l7">G</span><span class="letter l8">A</span>
+      </h1>
+      <p class="subtitle">Let's get in !!</p>
+    </header>
 
     <div class="input-group">
-      <input
-        type="text"
-        placeholder="Enter your name"
-        class="name-input"
-        [(ngModel)]="username"
-      />
+      <div class="input-wrapper">
+        <input
+          type="text"
+          placeholder="Enter your name"
+          class="name-input"
+          [(ngModel)]="username"
+        />
+        <span class="input-focus-line"></span>
+      </div>
     </div>
 
     <div class="button-group">
-       <button class="btn primary-btn" (click)="createRoom()">
-        Create Room
+      <button class="btn primary-btn" (click)="createRoom()">
+        <p class="btn-text">Create Room</p>
+  
       </button>
 
       <button class="btn secondary-btn" (click)="joinRoom()">
-        Join Room
+        <p class="btn-text">Join Room</p>
+        
       </button>
     </div>
   </div>

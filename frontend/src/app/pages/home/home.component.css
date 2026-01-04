@@ -1,37 +1,227 @@
-.landing-container {
-  height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+
+/* ==============================
+   APP WRAPPER (ARENA)
+============================== */
+.app-wrapper {
+ min-height: 100vh;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
+
+  /* BACKGROUND IMAGE */
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.6)
+    ),
+    url('src/assets/landing-bg.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+}
+/* ===============================
+   MAIN CARD (STAGE)
+================================ */
+.glass-card {
+  width: min(520px, 94%);
+  padding: 3.8rem 2.8rem;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  border-radius: 20px;
+  
 }
 
-.title {
-  font-size: 36px;
-  margin-bottom: 10px;
+/* Stage light strips */
+.glass-card::before,
+.glass-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    #FF6B35,
+    #FFB142,
+    #8D5CF6
+  );
 }
 
-.subtitle {
-  font-size: 14px;
-  margin-bottom: 40px;
-  opacity: 0.9;
+.glass-card::before { top: 0; }
+.glass-card::after { bottom: 0; }
+
+/* ===============================
+   HEADER
+================================ */
+header {
+  margin-bottom: 3.5rem;
 }
 
-.start-btn {
-  padding: 14px 40px;
-  font-size: 18px;
-  border-radius: 30px;
-  border: none;
-  background-color: #ffffff;
-  color: #667eea;
+.status-badge {
+  display: inline-block;
+  padding: 0.55rem 1.6rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+
+  background: rgba(26, 11, 46, 0.85);
+  border: 1px solid rgba(255, 177, 66, 0.45);
+  border-radius: 999px;
+  color: #FFB142;
+
+  margin-bottom: 1.6rem;
+}
+
+/* ===============================
+   TITLE
+================================ */
+.main-title {
+  font-size: 3.3rem;
+  font-weight: 900;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.letter {
+  display: inline-block;
+  color: #FFB142; /* Golden Ember — stands out on deep background */
+  
+  /* Always a subtle glow + animation */
+  text-shadow:
+    0 0 4px #FFB142,
+    0 0 12px #FF6B35,
+    0 0 24px #8D5CF6;
+
+  animation: glowPulse 3s infinite ease-in-out;
+}
+
+.l1 { animation-delay: 0s; }
+.l2 { animation-delay: 0.2s; }
+.l3 { animation-delay: 0.4s; }
+.l4 { animation-delay: 0.6s; }
+.l5 { animation-delay: 0.8s; }
+.l6 { animation-delay: 1s; }
+.l7 { animation-delay: 1.2s; }
+.l8 { animation-delay: 1.4s; }
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px #FFB142,
+      0 0 14px #FF6B35,
+      0 0 28px #8D5CF6;
+  }
+  50% {
+    text-shadow:
+      0 0 12px #FFB142,
+      0 0 28px #FF6B35,
+      0 0 56px #8D5CF6;
+  }
+}
+
+.main-title .letter {
+  animation-name: glowPulse, letterBounce;
+  animation-duration: 3s, 1.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes letterBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ===============================
+   BUZZER AREA
+================================ */
+.buzzer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 16px 36px;
+  border-radius: 999px; /* 🔑 pill shape */
+
+  border: 2px solid rgba(141, 92, 246, 0.9);
+  background: rgba(26, 11, 46, 0.65);
+
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
   cursor: pointer;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 0 18px rgba(141, 92, 246, 0.55),
+    inset 0 0 12px rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
 }
 
-.start-btn:hover {
-  transform: scale(1.05);
+
+/* TEXT */
+.pill-btn .text {
+  z-index: 2;
+}
+
+/* GLOW BORDER EFFECT */
+.pill-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #8D5CF6,
+    #FF6B35,
+    #FFB142,
+    #8D5CF6
+  );
+  opacity: 0.35;
+  filter: blur(12px);
+  z-index: 0;
+}
+
+/* HOVER */
+.pill-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 26px rgba(141, 92, 246, 0.9),
+    0 0 48px rgba(255, 107, 53, 0.6);
+}
+
+/* CLICK */
+.pill-btn:active {
+  transform: scale(0.97);
+  box-shadow:
+    0 0 16px rgba(141, 92, 246, 0.6);
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 2.7rem;
+  }
+
+  .pro-buzzer {
+    width: 150px;
+    height: 150px;
+  }
 }

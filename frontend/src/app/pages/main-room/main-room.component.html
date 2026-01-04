@@ -1,29 +1,27 @@
 <div class="container-fluid vh-100 bg-light">
 
   <!-- HEADER -->
-  <div class="row align-items-center px-3 py-2 bg-white border-bottom">
-    <div class="col">
-      <div>
-        <strong>Room ID: {{roomId}}</strong>
-        <span *ngIf="maxPlayers" class="ms-3 text-muted">
-          Players: {{members.length}}/{{maxPlayers}}
-        </span>
-      </div>
-      <div *ngIf="sessionName" class="mt-1">
-        <small class="text-primary fw-bold">{{sessionName}}</small>
-      </div>
-    </div>
-    <div class="col text-center">
-      <span *ngIf="timeRemaining" class="badge bg-primary fs-6">
-        Time: {{timeRemaining}}
-      </span>
-    </div>
-    <div class="col text-end">
-      <button class="btn btn-outline-danger btn-sm" (click)="leaveRoom()">
-        Leave Room
-      </button>
+  <div class="row align-items-center px-4 py-2 custom-header">
+  <div class="col-4">
+    <div class="room-info">
+      <span class="room-id-label">ROOM ID:</span>
+      <span class="room-id-value">{{roomId}}</span>
     </div>
   </div>
+
+  <div class="col-4 d-flex justify-content-center">
+    <div *ngIf="sessionName" class="session-pill">
+      {{sessionName}}
+    </div>
+  </div>
+
+  <div class="col-4 text-end d-flex align-items-center justify-content-end gap-3">
+    <span *ngIf="timeRemaining" class="timer-badge">
+      {{timeRemaining}}
+    </span>
+    <button class="leave-btn btn-primary" (click)="leaveRoom()">Leave</button>
+  </div>
+</div>
 
   <!-- MAIN CONTENT -->
   <div class="row h-100">
@@ -46,7 +44,6 @@
     <!-- CENTER: BUZZER -->
     <div
       class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center text-white"
-      style="background: linear-gradient(135deg, #667eea, #764ba2);"
     >
       <button 
         class="btn btn-light rounded-circle buzzer-btn" 

@@ -1,12 +1,180 @@
-.buzzer-btn {
-  width: 200px;
-  height: 200px;
-  font-size: 28px;
-  font-weight: bold;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
+.container-fluid {
+  background: radial-gradient(
+    circle at top,
+    #4B2C7F,
+    #1A0B2E 70%
+  );
+  color: #E7E5EC;
+}
+.custom-header {
+  background: linear-gradient(
+    90deg,
+    #1A0B2E,
+    #4B2C7F
+  );
+  border-bottom: 1px solid rgba(13, 202, 240, 1);
 }
 
-.buzzer-btn:hover {
-  transform: scale(1.05);
+/* ROOM ID */
+.room-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.room-id-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: #FFB142;
+}
+
+.room-id-value {
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+/* SESSION NAME */
+.session-pill {
+  position: relative;
+  padding: 14px 36px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  background: transparent;
+  border: 2px solid #c77dff;
+  border-radius: 999px;
+  outline: none;
+  font-weight: 600;
+
+  /* Neon glow */
+  box-shadow:
+    0 0 8px rgba(199, 125, 255, 0.6),
+    0 0 16px rgba(199, 125, 255, 0.6),
+    0 0 32px rgba(199, 125, 255, 0.4);
+
+  transition: all 0.3s ease;
+}
+
+/* TIMER */
+.timer-badge {
+  position: relative;
+  background: rgba(26, 11, 46, 0.8); /* Deep Purple from palette */
+  color: #ffffff;
+  padding: 20px 40px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  
+  /* Hexagonal Shape */
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  
+  /* Neon Border & Glow */
+  outline: 3px solid #FF6B35; /* Sunset Orange */
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+  transition: all 0.3s ease;
+}
+.leave-btn {
+  background: transparent;
+  border: 1px solid #FF6B35;
+  color: #FF6B35;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 6px 16px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.leave-btn:hover {
+  background: #FF6B35;
+  color: #1A0B2E;
+}
+.col-md-3.bg-white {
+  background: rgba(26, 11, 46, 0.95) !important;
+  border-color: rgba(255, 177, 66, 0.25) !important;
+}
+
+h5 {
+  color: #FFB142;
+  letter-spacing: 0.12em;
+  font-weight: 900;
+}
+
+.list-group-item {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #E7E5EC;
+}
+
+.list-group-item span {
+  margin-left: 6px;
+  font-size: 0.75rem;
+  color: #8D5CF6;
+}
+
+.buzzer-btn {
+  width: 220px;
+  height: 220px;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+
+  background: radial-gradient(
+    circle at top,
+    #FFB142,
+    #FF6B35
+  );
+  border: none;
+  color: #1A0B2E;
+
+  box-shadow:
+    0 20px 0 #4B2C7F,
+    0 30px 60px rgba(0, 0, 0, 0.9);
+
+  transition: transform 0.1s ease;
+}
+
+.buzzer-btn:active {
+  transform: translateY(10px);
+  box-shadow:
+    0 10px 0 #4B2C7F,
+    0 18px 30px rgba(0, 0, 0, 0.85);
+}
+
+/* DISABLED */
+.buzzer-btn:disabled {
+  background: #555;
+  color: #999;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+p.text-warning {
+  color: #FF6B35 !important;
+  letter-spacing: 0.2em;
+}
+.col-md-3.border-start {
+  background: rgba(26, 11, 46, 0.95) !important;
+}
+
+.list-group-item strong {
+  color: #FFB142;
+}
+
+.list-group-item .text-primary {
+  color: #8D5CF6 !important;
+}
+
+.list-group-item.text-muted {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.text-white{
+  background: linear-gradient(rgba(0,0,0,0.1)),url('src/assets/stage-lights.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }

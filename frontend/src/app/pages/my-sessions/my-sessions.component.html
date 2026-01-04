@@ -1,0 +1,66 @@
+<div class="sessions-container">
+  <div class="sessions-card">
+    <div class="card-header">
+      <button class="back-btn" (click)="goBack()">← Back</button>
+      <h2 class="card-title">My Sessions</h2>
+    </div>
+
+    <div *ngIf="currentUser" class="user-info-header">
+      <p>Logged in as: <strong>{{ currentUser.name }}</strong></p>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="isLoading" class="loading">
+      <p>Loading sessions...</p>
+    </div>
+
+    <div *ngIf="!isLoading && sessions.length === 0 && !errorMessage" class="no-sessions">
+      <p>No saved sessions found.</p>
+      <p class="hint">Create a room and check "Save this session" to save your sessions here.</p>
+    </div>
+
+    <div *ngIf="!isLoading && sessions.length > 0" class="sessions-list">
+      <div *ngFor="let session of sessions" class="session-item">
+        <div class="session-header">
+          <h3>{{ session.sessionName }}</h3>
+          <span class="session-date">{{ formatDate(session.createdAt) }}</span>
+        </div>
+        
+        <div class="session-details">
+          <div class="detail-item">
+            <span class="label">Room ID:</span>
+            <span class="value">{{ session.roomId }}</span>
+          </div>
+          
+          <div class="detail-item" *ngIf="session.maxPlayers">
+            <span class="label">Max Players:</span>
+            <span class="value">{{ session.maxPlayers }}</span>
+          </div>
+          
+          <div class="detail-item" *ngIf="session.sessionTime">
+            <span class="label">Session Time:</span>
+            <span class="value">{{ session.sessionTime }} minutes</span>
+          </div>
+          
+          <div class="detail-item" *ngIf="session.language">
+            <span class="label">Language:</span>
+            <span class="value">{{ session.language }}</span>
+          </div>
+          
+          <div class="detail-item" *ngIf="session.buzzes && session.buzzes.length > 0">
+            <span class="label">Total Buzzes:</span>
+            <span class="value">{{ session.buzzes.length }}</span>
+          </div>
+        </div>
+
+        <div class="session-actions">
+          <button class="primary-btn" (click)="viewSession(session)">View Session</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

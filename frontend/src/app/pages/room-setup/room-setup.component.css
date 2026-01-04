@@ -1,74 +1,236 @@
+/* ===============================
+   PAGE CONTAINER
+================================ */
 .room-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 60px 16px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 40px;
-  padding: 40px;
-  font-family: Arial, Helvetica, sans-serif;
+  align-items: flex-start;
+  
+  color: #E7E5EC;
+    background: linear-gradient(rgba(0,0,0,0.6)),url('src/assets/room-setup.png');
 }
 
-/* Card */
+/* ===============================
+   CARD
+================================ */
 .card {
-  background: #ffffff;
-  width: 340px;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  position: relative;
-  overflow: visible;
+  width: 100%;
+  max-width: 520px;
+  background: rgba(75, 44, 127, 0.18);
+  border: 1px solid #0dcaf0;
+  border-radius: 18px;
+  padding: 28px 26px 32px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
+/* ===============================
+   CARD HEADER
+================================ */
 .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  padding: 20px;
-  padding-left: 60px;
-  padding-right: 20px;
-  border-bottom: none;
-  text-align: center;
-  overflow: visible;
+  margin-bottom: 30px;
 }
 
 .card-title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: #222;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #FFB142;
+  text-transform: uppercase;
 }
-/* Form */
+
+/* Back button fix */
+.back-btn {
+  position: absolute;
+  left: 0;
+  background: none;
+  border: none;
+  color: #8D5CF6;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.back-btn:hover {
+  color: #FFB142;
+}
+
+/* ===============================
+   FORM GROUP
+================================ */
 .form-group {
-  margin-bottom: 15px;
-  position: relative;
-  overflow: visible;
+  margin-bottom: 22px;
 }
 
-label {
+/* Labels */
+.form-group label {
   display: block;
+  margin-bottom: 6px;
   font-size: 13px;
-  margin-bottom: 5px;
-  color: #555;
+  font-weight: 600;
+  color: #E7E5EC;
 }
 
-input,
-select {
+/* Required star */
+.required {
+  color: #FF6B35;
+}
+
+/* ===============================
+   INPUTS & SELECTS
+================================ */
+.form-group input,
+.form-group select {
   width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-bottom: 1px solid rgba(255, 177, 66, 0.25);
+ 
+  font-size: 14px;
+  color: #FFB142;
+  outline: none;
+  transition: all 0.25s ease;
+  &:focus{
+    outline: none;
+  }
+}
+
+/* Placeholder */
+.form-group input::placeholder {
+  color: rgba(255, 177, 66, 0.45);
+}
+
+/* Focus glow */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #8D5CF6;
+  box-shadow: 0 0 0 2px rgba(141, 92, 246, 0.3);
+}
+
+/* ===============================
+   DROPDOWN TEXT COLOR
+================================ */
+.form-group select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #FFB142 50%),
+    linear-gradient(135deg, #FFB142 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* ===============================
+   UNDERLINE GLOW
+================================ */
+.input-focus-line {
+  display: block;
+  height: 2px;
+  width: 0;
+  margin-top: 2px;
+  background: linear-gradient(90deg, #FFB142, #8D5CF6);
+  transition: width 0.35s ease;
+}
+
+.form-group input:focus + .input-focus-line {
+  width: 100%;
+}
+
+/* ===============================
+   TOGGLE / CHECKBOX
+================================ */
+.toggle-group {
+  margin-top: 10px;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 14px;
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #667eea;
+/* Checkbox visibility FIX */
+.toggle-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #FFB142;
 }
 
-/* Invite box */
+/* Disabled text */
+.disabled-text {
+  opacity: 0.4;
+}
+
+/* Login required text */
+.login-required-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #FF6B35;
+}
+
+/* ===============================
+   LOGIN STATUS
+================================ */
+.login-prompt {
+  background: rgba(26, 11, 46, 0.6);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.login-text {
+  font-size: 13px;
+  color: #E7E5EC;
+}
+
+.login-link {
+  color: #FFB142;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  color: #FF6B35;
+}
+
+/* Logged-in user */
+.user-info {
+  font-size: 13px;
+}
+
+.user-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.my-sessions-link {
+  color: #8D5CF6;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #FF6B35;
+  cursor: pointer;
+}
+
+/* ===============================
+   INVITE LINK
+================================ */
 .invite-box {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
 .invite-box input {
@@ -77,149 +239,170 @@ select:focus {
 
 .copy-btn {
   padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #FFB142, #FF6B35);
   border: none;
-  background: #667eea;
-  color: #fff;
-  border-radius: 6px;
+  font-weight: 700;
   cursor: pointer;
+  color: #1A0B2E;
 }
 
-/* BACK BUTTON */
-.back-btn {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #4f6ef7;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 5px 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
+.copy-success {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #FFB142;
 }
 
-.back-btn:hover {
-  text-decoration: underline;
-  color: #3a5dd8;
-}
-
-/* Buttons */
+/* ===============================
+   PRIMARY BUTTON
+================================ */
 .primary-btn {
   width: 100%;
-  padding: 12px;
-  background: #667eea;
-  color: #fff;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #FF6B35, #FFB142);
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: #1A0B2E;
   cursor: pointer;
-  margin-top: 10px;
+  text-transform: uppercase;
 }
 
 .primary-btn:hover {
-  background: #556cd6;
+  transform: translateY(-1px);
 }
 
-/* Switch text */
+/* ===============================
+   SWITCH TEXT
+================================ */
 .switch-text {
-  margin-top: 15px;
-  font-size: 13px;
+  margin-top: 18px;
   text-align: center;
-  color: #555;
+  font-size: 13px;
+  color: white;
 }
 
-.link {
-  color: #667eea;
+.switch-text .link {
+  color: #8D5CF6;
+  font-weight: 700;
   cursor: pointer;
-  font-weight: bold;
 }
 
-.info-icon {
-  cursor: pointer;
-  font-size: 14px;
+.switch-text .link:hover {
+  color: #FFB142;
+  text-decoration: underline;
 }
 
-.toggle-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  position: relative;
-  overflow: visible;
+/* ===============================
+   MODAL FIX (BOOTSTRAP)
+================================ */
+/* ===============================
+   BACKDROP BLUR (IMPORTANT)
+================================ */
+.modal-backdrop.show {
+  backdrop-filter: blur(8px);
+  background-color: rgba(26, 11, 46, 0.75);
 }
 
-.toggle-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  margin: 0;
-  width: 100%;
-  position: relative;
-  overflow: visible;
+/* ===============================
+   MODAL CONTENT
+================================ */
+.modal-content {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 177, 66, 1),
+    rgba(75, 44, 127, 1)
+  );
+  border: 1px solid rgba(255, 177, 66, 1);
+  border-radius: 18px;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(255, 177, 66, 0.25);
+  color: #E7E5EC;
+  overflow: hidden;
 }
 
-.toggle-label input[type="checkbox"] {
-  width: auto;
-  margin: 0;
-  cursor: pointer;
-  flex-shrink: 0;
+/* ===============================
+   MODAL HEADER
+================================ */
+.modal-header {
+  border-bottom: none;
+  padding: 18px 22px;
 }
 
-.toggle-label span {
-  flex: 1;
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FFB142;
 }
 
-.info-icon {
-  cursor: help;
-  color: #667eea;
-  font-size: 14px;
-  flex-shrink: 0;
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
+/* Close button visibility fix */
+.btn-close {
+  filter: invert(1);
+  opacity: 0.7;
 }
 
-/* Custom tooltip */
-.info-icon[title]:hover::after {
-  content: attr(title);
-  position: absolute;
-  left: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 10px 14px;
-  background-color: #333;
-  color: #fff;
-  border-radius: 6px;
-  font-size: 12px;
-  line-height: 1.4;
-  z-index: 10000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-  max-width: 280px;
-  min-width: 200px;
-  white-space: normal;
-  word-wrap: break-word;
-  font-weight: normal;
+.btn-close:hover {
   opacity: 1;
-  visibility: visible;
 }
 
-.info-icon[title]:hover::before {
-  content: '';
-  position: absolute;
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 4px;
-  border: 6px solid transparent;
-  border-right-color: #333;
-  z-index: 10001;
-  pointer-events: none;
-  opacity: 1;
-  visibility: visible;
+/* ===============================
+   MODAL BODY
+================================ */
+.modal-body {
+  padding: 10px 22px 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #E7E5EC;
 }
 
+/* ===============================
+   MODAL FOOTER
+================================ */
+.modal-footer {
+  border-top: none;
+  padding: 18px 22px;
+}
+
+/* ===============================
+   OK BUTTON (GOLD ACTION)
+================================ */
+.modal-footer .btn-primary {
+  background: linear-gradient(
+    135deg,
+    #FFB142,
+    #FF6B35
+  );
+  border: none;
+  border-radius: 12px;
+  padding: 10px 26px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1A0B2E;
+  box-shadow:
+    0 8px 22px rgba(255, 107, 53, 0.45);
+  transition: all 0.25s ease;
+}
+
+.modal-footer .btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 30px rgba(255, 177, 66, 0.6);
+}
+
+/* ===============================
+   SUBTLE OPEN ANIMATION
+================================ */
+.modal.fade .modal-dialog {
+  transform: scale(0.95);
+  transition: transform 0.25s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+}
