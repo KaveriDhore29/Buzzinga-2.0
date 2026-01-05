@@ -23,7 +23,7 @@ export class SocketService implements OnDestroy {
       return; // Socket already initialized and connected
     }
 
-    this.socket = io('http://localhost:3000', {
+    this.socket = io('https://buzzinga-backend.onrender.com', {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionAttempts: 5
